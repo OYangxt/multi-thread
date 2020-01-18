@@ -3,16 +3,21 @@ package com.oyxt.example.service.impl;
 import com.oyxt.example.redis.MissionRedisDao;
 import com.oyxt.example.service.MissionService;
 import com.oyxt.example.service.task.MyTask;
+import com.oyxt.example.util.HttpResult;
 import com.oyxt.example.util.JsonTools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * @author 20190712713
@@ -58,6 +63,12 @@ public class MissionServiceImpl implements MissionService {
             }
         }
 
+    }
+
+    @Override
+    public Map<String, String> findTaskResult(String taskId) {
+
+        return missionRedisDao.findResultByTaskId(taskId);
     }
 
 }

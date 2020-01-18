@@ -26,4 +26,10 @@ public class MissionRedisDaoImpl implements MissionRedisDao {
     public void updateMission(String taskId, Map<String, String> mission) {
         template.boundHashOps("oyxt:task:mission:" + taskId).putAll(mission);
     }
+
+    @Override
+    public Map<String,String> findResultByTaskId(String taskId) {
+        Map<String, String> map = template.<String,String>boundHashOps("oyxt:task:result:" + taskId).entries();
+        return map;
+    }
 }

@@ -10,15 +10,22 @@ import java.util.Map;
 public interface MissionRedisDao {
     /**
      * 任务返回值存储缓存
-     * @param taskId
-     * @param result
+     * @param taskId 任务id
+     * @param result 任务执行后，返回的结果
      */
     void updateResult(String taskId, Map<String, String> result);
 
     /**
      * 任务命令缓存
-     * @param taskId
-     * @param mission
+     * @param taskId 任务id
+     * @param mission 任务待执行的命令
      */
     void updateMission(String taskId, Map<String, String> mission);
+
+    /**
+     * 根据任务Id查询任务执行的结果
+     * @param taskId 任务id
+     * @return
+     */
+    Map<String,String> findResultByTaskId(String taskId);
 }
