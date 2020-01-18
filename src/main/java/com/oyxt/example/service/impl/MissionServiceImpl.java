@@ -1,14 +1,13 @@
 package com.oyxt.example.service.impl;
 
+import com.google.common.collect.Maps;
 import com.oyxt.example.redis.MissionRedisDao;
 import com.oyxt.example.service.MissionService;
 import com.oyxt.example.service.task.MyTask;
-import com.oyxt.example.util.HttpResult;
 import com.oyxt.example.util.JsonTools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +31,7 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public void run(Integer num, String mission) {
         Map<String, String> resultMap ;
-        Map<String, String> missionMap = new HashMap<>(1);
+        HashMap<String, String> missionMap = Maps.newHashMap();
 
         String[] missionArray = mission.split(";");
 
@@ -57,7 +56,6 @@ public class MissionServiceImpl implements MissionService {
                 String taskId = resultMap.get("taskId");
                 //任务返回值结果缓存到redis中
                 missionRedisDao.updateResult(taskId,resultMap);
-
             } catch (Exception e) {
                 log.info("获取任务返回值异常{}", e);
             }

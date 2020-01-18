@@ -1,5 +1,7 @@
 package com.oyxt.example.service.task;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.oyxt.example.util.JsonTools;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +26,7 @@ public class MyTask implements Callable<String> {
     @Override
     public String call() throws Exception {
         log.info("任务{}已启动，接收到的命令为：{}",taskId,mission);
-        Map<String, String> resultMap = new HashMap<>(2);
+        HashMap<String, String> resultMap = Maps.newHashMap();
 
         String result;
         switch (mission) {
